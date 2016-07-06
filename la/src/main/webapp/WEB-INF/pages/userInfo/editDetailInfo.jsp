@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>详细信息</title>
-<%-- <script src="${ctx }/resources/js/pages/userInfo/editMainInfo.js"
-	type="text/javascript" charset="utf-8"></script> --%>
+<script src="${ctx }/resources/js/pages/userInfo/editDetailInfo.js"
+	type="text/javascript" charset="utf-8"></script>
 
 </head>
 
@@ -25,7 +25,7 @@
 				<div style="text-align: center;">生疏的爱</div>
 				<div class="list-group detailMenu">
 					<a href="${ctx }/detailInfos/editInterests" target="contentFrame"
-						class="list-group-item list-group-item-warning">兴趣爱好</a> <a
+						class="list-group-item list-group-item-warning active">兴趣爱好</a> <a
 						href="${ctx }/detailInfos/editLivingCondition"
 						target="contentFrame"
 						class="list-group-item list-group-item-warning">生活状态</a> <a

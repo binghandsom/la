@@ -231,7 +231,7 @@ $(function() {
 												if (result.success) {
 													alert("注册成功");
 													window.location.href = ctx
-															+ "/userInfo/editMainInfo";
+															+ "/userMainInfo/editMainInfo";
 												} else {
 													if (result.message) {
 														alert("注册失败"

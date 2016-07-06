@@ -232,12 +232,12 @@ public class UserMainInfoController {
 		System.out.println(baseInfo);
 		String path = PropertiesUtil.getPropertyValue("config/properties/common.properties", "fileSystemRoot")
 				+ "/picture/userHeadPictures";
-		// Account account = new Account();
-		// account.setId("xxx");
-		// session.setAttribute("account", account);
-		/**
-		 * 真实环境中session是有account的
-		 */
+				// Account account = new Account();
+				// account.setId("xxx");
+				// session.setAttribute("account", account);
+				/**
+				 * 真实环境中session是有account的
+				 */
 		String fileName = id + RandomStringUtils.random(5, true, false) + System.currentTimeMillis() + ".jpg";
 		System.out.println(fileName);
 		File targetFile = new File(path);
@@ -271,5 +271,16 @@ public class UserMainInfoController {
 		return "userAccount/regAndLogin";
 	}
 
-	
+	@RequestMapping(value = "selfInfo", method = RequestMethod.GET)
+	public String selfInfo(HttpSession session) {
+		//判断session是否有account==null
+		//如果为null则不予观看，跳转至登录页
+		
+		
+		
+		//查找对应的用户的信息给予显示
+		//在service中执行查找逻辑
+		return "userInfo/selfInfo";
+	}
+
 }

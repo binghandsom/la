@@ -2,6 +2,9 @@
  * 
  */
 $(function() {
+	var x = $("div.detailMenu>a[href='" + ctx + "/detailInfos/editInterests']",
+			window.parent.document);
+	beActive(x);
 	var icons = {
 		header : "ui-icon-circle-arrow-e",
 		activeHeader : "ui-icon-circle-arrow-s"
@@ -89,5 +92,8 @@ $(function() {
 					}
 				});
 			});
-
 });
+function beActive(obj) {
+	$("div.detailMenu>a", window.parent.document).removeClass("active");
+	obj.addClass("active");
+}

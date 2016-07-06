@@ -2,6 +2,10 @@
  * 编辑照片页面引用
  */
 $(function() {
+	var x = $("div.detailMenu>a[href='" + ctx + "/detailInfos/editPhotos']",
+			window.parent.document);
+	beActive(x);
+
 	$("#uploadTriggerBtn").click(function() {
 		$("#previewBox").empty();
 	});
@@ -33,7 +37,7 @@ $(function() {
 			contentType : false,
 			processData : false,
 			success : function(data, success) {
-				
+
 			},
 			error : function(returndata) {
 				alert(returndata);
@@ -86,4 +90,8 @@ function fileChanged() {
 			}
 		});
 	}
+}
+function beActive(obj) {
+	$("div.detailMenu>a", window.parent.document).removeClass("active");
+	obj.addClass("active");
 }

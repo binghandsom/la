@@ -1,0 +1,77 @@
+#photoPreviewBox {
+	width: 300px;
+	height: 360px;
+	border: solid 1px yellowgreen;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+#photoCurrentPreview {
+	display: block;
+	margin: 0 auto;
+	height: 76%;
+	width: 100%;
+}
+
+#listBox {
+	width: 84%;
+	height: 22%;
+	margin-top: 2;
+	display: inline-block;
+	overflow: hidden;
+}
+
+#photoListPreview {
+	position: relative;
+	height: 100%;
+	width: 1000px;
+	padding-left: 0;
+	padding-right: 0;
+	background: gainsboro;
+}
+
+#photoListPreview a {
+	text-decoration: none;
+}
+
+#photoListPreview a>img {
+	position: relative;
+	display: inline-block;
+	margin: 0 0;
+	height: 100%;
+	width: 46px;
+}
+
+.activeImg>img {
+	border-top: solid salmon 2px;
+	border-bottom: solid salmon 2px;
+}
+
+#preImg {
+	margin-left: -5px;
+}
+
+#nextImg {
+	margin-right: -5px;
+}
+
+#preImg>img,
+#nextImg>img {
+	display: inline-block;
+	height: 25%;
+	width: 8%;
+	position: relative;
+	text-decoration: none;
+	bottom: 25px;
+	opacity: 0.6;
+}
+
+#preImg>img:hover,
+#nextImg>img:hover {
+	bottom: 30px;
+	opacity: 1;
+	background: #A6E1EC;
+	opacity: 1;
+	transform: rotateX(30deg);
+}

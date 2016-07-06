@@ -1,4 +1,7 @@
 $(function() {
+	var x = $("div.detailMenu>a[href='" + ctx
+			+ "/detailInfos/editWorkingCondition']", window.parent.document);
+	beActive(x);
 
 	$("#jobKind").selectmenu({
 
@@ -42,3 +45,7 @@ $(function() {
 				});
 			});
 });
+function beActive(obj) {
+	$("div.detailMenu>a", window.parent.document).removeClass("active");
+	obj.addClass("active");
+}

@@ -2,6 +2,9 @@
  * 
  */
 $(function() {
+	var x = $("div.detailMenu>a[href='" + ctx
+			+ "/detailInfos/editLoveAttitude']", window.parent.document);
+	beActive(x);
 	$("#loveTimes").selectmenu({});
 
 	$("#dislikedShengxiao").selectmenu({});
@@ -66,3 +69,7 @@ $(function() {
 								});
 					});
 });
+function beActive(obj) {
+	$("div.detailMenu>a", window.parent.document).removeClass("active");
+	obj.addClass("active");
+}

@@ -2,6 +2,12 @@
  * 
  */
 $(function() {
+	var x = $("div.detailMenu>a[href='" + ctx + "/detailInfos/editLivingCondition']",
+			window.parent.document);
+	beActive(x);
+
+	$("div.detailMenu>a[href='" + ctx + "/detailInfos/editLivingCondition']",
+			window.parent.document).trigger("click");
 
 	$("#drinking").selectmenu();
 
@@ -59,3 +65,7 @@ $(function() {
 			});
 
 });
+function beActive(obj) {
+	$("div.detailMenu>a", window.parent.document).removeClass("active");
+	obj.addClass("active");
+}
