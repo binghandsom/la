@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+
+fieldset {
+	border: 0;
+	/* margin-left: 300px; */
+}
+
+label.section {
+	display: inline-block;
+	margin: 20px 0 0 20px;
+	color: #999966;
+	width: 6em;
+	text-align: right;
+}
+
+label.sectionLarge {
+	display: block;
+	margin: 20px 0 0 20px;
+	color: #999966;
+	text-align: left;
+}
+
+select {
+	width: 200px;
+}
+
+#consume {
+	margin-left: 40px;
+}
+
+#consume>span:hover label, input {
+	cursor: pointer;
+	color: #856018;
+	background-color: wheat;
+}

@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+label.section {
+	display: inline-block;
+	margin: 20px 0 0 20px;
+	color: #999966;
+	width: 6em;
+	text-align: right;
+}
+
+select {
+	width: 300px;
+}

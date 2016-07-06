@@ -1,0 +1,34 @@
+#heightSlider {
+	/*float: left;
+ 	clear: left;*/
+	width: 300px;
+	margin: 15px;
+}
+
+#salarySlider {
+	/*float: left;
+ 	clear: left;*/
+	width: 300px;
+	margin: 15px;
+}
+
+span {
+	color: brown;
+}
+
+label {
+	font-weight: bolder;
+	color: darkorange;
+}
+
+hr {
+	width: 80%;
+}
+
+#headImg {
+	/*加入背景图片*/
+	width: 300px; /*设定层的宽度*/
+	margin: auto; /*层居中*/
+	height: 300px; /*设定高度*/
+	clear: both /*清除浮动*/
+}
