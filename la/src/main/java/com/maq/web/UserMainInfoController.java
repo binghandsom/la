@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +18,6 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,8 +54,8 @@ public class UserMainInfoController {
 
 	@ResponseBody
 	@RequestMapping(value = "checkNickName", method = RequestMethod.POST)
-	public ResponseMessage checkNickName(String nickName) {
-		ResponseMessage rm = umiSvc.checkNickName(nickName);
+	public ResponseMessage checkNickName(String nickName, HttpSession session) {
+		ResponseMessage rm = umiSvc.checkNickName(nickName, session);
 		return rm;
 	}
 
@@ -216,10 +214,20 @@ public class UserMainInfoController {
 			String nickName, int gender, int marriage, String declaration, int height, int salary, String goWhere) {
 		String headPicPath = session.getAttribute("headPicPath").toString();
 		File headPic = new File(headPicPath);
-		UserMainInfo baseInfo = new UserMainInfo();
 		Date _birthDay = DateUtils.strToDate(birthDay, DateUtils.CH_DATE_FORMATE_STR);
-		String id = ((Account) session.getAttribute("account")).getId();
-		baseInfo.setId(id);
+
+		String id = "";
+		try {
+			id = ((Account) session.getAttribute("account")).getId();
+		} catch (NullPointerException e) {
+			// 返回登陆页
+			return "userAccount/regAndLogin";
+		}
+		UserMainInfo baseInfo = umiSvc.getMainInfo(id);
+		if (baseInfo == null) {
+			baseInfo = new UserMainInfo();
+			baseInfo.setId(id);
+		}
 		baseInfo.setNickName(nickName);
 		baseInfo.setHeight(height);
 		baseInfo.setBirthDay(_birthDay);
@@ -232,12 +240,12 @@ public class UserMainInfoController {
 		System.out.println(baseInfo);
 		String path = PropertiesUtil.getPropertyValue("config/properties/common.properties", "fileSystemRoot")
 				+ "/picture/userHeadPictures";
-				// Account account = new Account();
-				// account.setId("xxx");
-				// session.setAttribute("account", account);
-				/**
-				 * 真实环境中session是有account的
-				 */
+		// Account account = new Account();
+		// account.setId("xxx");
+		// session.setAttribute("account", account);
+		/**
+		 * 真实环境中session是有account的
+		 */
 		String fileName = id + RandomStringUtils.random(5, true, false) + System.currentTimeMillis() + ".jpg";
 		System.out.println(fileName);
 		File targetFile = new File(path);
@@ -257,11 +265,20 @@ public class UserMainInfoController {
 			e.printStackTrace();
 		}
 		baseInfo.setHeadPic(fileName);
-
-		List<String> headPicList = new ArrayList<String>();
+		//
+		UserMainInfo mainInfo = umiSvc.getMainInfo(id);
+		List<String> headPicList = null;
+		if (mainInfo == null) {
+			// 等于null表示第一次注册进入编辑主要信息页
+			headPicList = new ArrayList<String>();
+		} else {
+			// 表示登陆后，编辑已有信息，修改照片
+			headPicList = mainInfo.getHeadPicList();
+		}
 		headPicList.add(fileName);
 		baseInfo.setHeadPicList(headPicList);
 		umiSvc.save(baseInfo);
+		session.setAttribute("mainInfo", baseInfo);
 		if ("editDetailInfo".equals(goWhere)) {
 			return "userInfo/editDetailInfo";
 		} else if ("lookingLover".equals(goWhere)) {
@@ -273,13 +290,11 @@ public class UserMainInfoController {
 
 	@RequestMapping(value = "selfInfo", method = RequestMethod.GET)
 	public String selfInfo(HttpSession session) {
-		//判断session是否有account==null
-		//如果为null则不予观看，跳转至登录页
-		
-		
-		
-		//查找对应的用户的信息给予显示
-		//在service中执行查找逻辑
+		// 判断session是否有account==null
+		// 如果为null则不予观看，跳转至登录页
+
+		// 查找对应的用户的信息给予显示
+		// 在service中执行查找逻辑
 		return "userInfo/selfInfo";
 	}
 

@@ -17,7 +17,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.maq.bean.UserMainInfo;
 import com.maq.dao.UserDao;
-import com.maq.service.UserSvc;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:config/spring/applicationContext.xml","classpath:config/mongodb/mongodb.xml"})
@@ -26,8 +25,6 @@ public class TestBaseDao{
 	@Autowired
 	UserDao userDao;
 	
-	@Autowired
-	UserSvc userSvc;
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;

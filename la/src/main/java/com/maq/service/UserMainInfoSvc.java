@@ -10,12 +10,14 @@ import com.maq.bean.UserMainInfo;
 
 public interface UserMainInfoSvc {
 
-	ResponseMessage checkNickName(String nickName);
+	ResponseMessage checkNickName(String nickName,HttpSession session);
 
 	void save(UserMainInfo baseInfo);
 
 	ResponseMessage uploadHeadPics(HttpSession session);
 
 	List<UserMainInfo> getMainInfosList(Account account);
+
+	UserMainInfo getMainInfo(String id);
 	
 }

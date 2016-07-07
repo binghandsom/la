@@ -3,7 +3,6 @@ package com.maq.web;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.maq.base.utils.dto.ResponseMessage;
 import com.maq.bean.Account;
+import com.maq.bean.UserMainInfo;
 import com.maq.service.AccountSvc;
-import com.maq.service.UserSvc;
+import com.maq.service.UserMainInfoSvc;
 import com.maq.service.impl.AccountSvcImpl;
 
 @Controller
 @RequestMapping("userAccount")
 public class AccountController {
 	@Autowired
-	private UserSvc userSvc;
-	@Autowired
 	private AccountSvc accountSvc;
+	@Autowired
+	private UserMainInfoSvc umiSvc;
 
 	@RequestMapping("regAndLogin")
 	public String regAndLogin() {
@@ -77,7 +77,11 @@ public class AccountController {
 		System.out.println(account);
 		// 如果此用户登录成功则将用户账号信息保存在session中，service层中以做此保存操作
 		ResponseMessage rm = accountSvc.loginCheck(account, session);
-		System.out.println(rm);
+		if (rm.isSuccess()) {
+			String id = (String) session.getAttribute("id");
+			UserMainInfo mainInfo = umiSvc.getMainInfo(id);
+			session.setAttribute("mainInfo", mainInfo);
+		}
 		return rm;
 
 	}

@@ -17,6 +17,7 @@ import com.maq.base.utils.AliDayuSMSUtil;
 import com.maq.base.utils.MD5Util;
 import com.maq.base.utils.dto.ResponseMessage;
 import com.maq.bean.Account;
+import com.maq.bean.UserMainInfo;
 import com.maq.dao.AccountDao;
 import com.maq.service.AccountSvc;
 
@@ -89,6 +90,8 @@ public class AccountSvcImpl implements AccountSvc {
 		if (account2 != null) {
 			// 将用户信息保存至session
 			session.setAttribute("account", account2);
+			// 保存id更加方便获取
+			session.setAttribute("id", account2.getId());
 			rm.setSuccess(true);
 		} else {
 			int failTimes = 1;
@@ -245,6 +248,8 @@ public class AccountSvcImpl implements AccountSvc {
 		accountDao.save(account);
 		rm.setSuccess(true);
 		session.setAttribute("account", account);
+		String id = ((Account) session.getAttribute("account")).getId();
+		session.setAttribute("id", id);
 		return rm;
 	}
 

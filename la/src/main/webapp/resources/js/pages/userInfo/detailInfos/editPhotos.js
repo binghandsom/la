@@ -13,7 +13,6 @@ $(function() {
 		// 加号图片点击触发文件选择事件
 		$("#photoFiles").click();
 		$("#previewBox img").remove();
-
 	}).hover(
 			function() {
 				$(this).attr("src",
@@ -74,7 +73,7 @@ function fileChanged() {
 				if (!data.success) {
 					$("#previewPic" + i).attr("src",
 							ctx + "/resources/img/system/badPicture.jpg");
-					var ax = $("#previewPic" + i).attr("dd");
+					// var ax = $("#previewPic" + i).attr("dd");
 				} else {
 					var picName = data.message.picName;
 					var random = Math.random();

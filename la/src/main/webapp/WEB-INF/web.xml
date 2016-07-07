@@ -15,7 +15,7 @@
 	<!-- 开一条watchdog线程每60秒扫描一下配置文件的变化 -->
 	<context-param>
 		<param-name>log4jRefreshInterval</param-name>
-		<param-value>600000</param-value>
+		<param-value>60000</param-value>
 	</context-param>
 
 	<listener>

@@ -30,12 +30,12 @@ public class UserMainInfoSvcImpl implements UserMainInfoSvc {
 	/**
 	 * 检查昵称是否已经被占用
 	 */
-	public ResponseMessage checkNickName(String nickName) {
+	public ResponseMessage checkNickName(String nickName, HttpSession session) {
 		query = new Query(Criteria.where("nickName").is(nickName));
 		ResponseMessage rm = new ResponseMessage();
-
 		UserMainInfo objTheSame = mainInfoDao.queryOne(query);
-		if (objTheSame != null) {
+		UserMainInfo sessionObj = (UserMainInfo) session.getAttribute("mainInfo");
+		if (objTheSame != null && !sessionObj.equals(objTheSame)) {
 			rm.setSuccess(false);
 		} else {
 			rm.setSuccess(true);
@@ -47,6 +47,9 @@ public class UserMainInfoSvcImpl implements UserMainInfoSvc {
 		mainInfoDao.save(baseInfo);
 	}
 
+	/**
+	 * 上传照片，不是上传封面头像
+	 */
 	public ResponseMessage uploadHeadPics(HttpSession session) {
 		ResponseMessage rm = new ResponseMessage();
 		Account account = (Account) session.getAttribute("account");
@@ -108,6 +111,12 @@ public class UserMainInfoSvcImpl implements UserMainInfoSvc {
 		query.addCriteria(Criteria.where("gender").ne(info.getGender()));
 		List<UserMainInfo> infos = mainInfoDao.queryList(query);
 		return infos;
+	}
+
+	@Override
+	public UserMainInfo getMainInfo(String id) {
+		UserMainInfo mainInfo = mainInfoDao.queryById(id);
+		return mainInfo;
 	}
 
 }
